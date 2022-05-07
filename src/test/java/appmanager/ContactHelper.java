@@ -4,7 +4,7 @@ import model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ContactHelper {
+public class ContactHelper extends HelperBase {
     WebDriver wd;
 
     public ContactHelper(WebDriver wd) {
