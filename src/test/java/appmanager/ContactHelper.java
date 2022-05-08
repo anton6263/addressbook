@@ -25,4 +25,25 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("add new"));
         wd.get("http://localhost/addressbook/edit.php");
     }
+
+    public void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    public void deleteSelectedContact() {
+
+        click(By.xpath("//input[@value='Delete']"));
+    }
+
+    public void acceptAlert() {
+        wd.switchTo().alert().accept();
+    }
+
+    public void editContact() {
+        click(By.xpath("//img[@alt='Edit']"));
+    }
+
+    public void updateContact() {
+        click(By.name("update"));
+    }
 }
