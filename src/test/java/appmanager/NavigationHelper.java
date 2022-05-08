@@ -3,20 +3,19 @@ package appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class NavigationHelper {
-    WebDriver wd;
+public class NavigationHelper extends HelperBase{
 
     public NavigationHelper(WebDriver wd) {
-        this.wd = wd;
+        super(wd);
     }
 
     public void goToGroupPage() {
-      wd.findElement(By.linkText("groups")).click();
+      click(By.linkText("groups"));
       wd.get("http://localhost/addressbook/group.php");
     }
 
     public void goToHomePage() {
-      wd.findElement(By.linkText("home")).click();
+      click(By.linkText("home"));
       wd.get("http://localhost/addressbook/");
     }
 }
