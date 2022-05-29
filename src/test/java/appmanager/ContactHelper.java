@@ -4,6 +4,10 @@ import model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -16,10 +20,10 @@ public class ContactHelper extends HelperBase {
     }
 
     public void fillContactForm(ContactData contactData) {
-        type(By.name("firstname"), contactData.firstname());
-        type(By.name("lastname"), contactData.lastname());
-        type(By.name("email"), contactData.email());
-        type(By.name("homepage"), contactData.homepage());
+        type(By.name("firstname"), contactData.getFirstname());
+        type(By.name("lastname"), contactData.getLastname());
+        type(By.name("email"), contactData.getEmail());
+        type(By.name("homepage"), contactData.getHomepage());
     }
 
     public void goToCreateContactPage() {
@@ -27,8 +31,8 @@ public class ContactHelper extends HelperBase {
         wd.get("http://localhost/addressbook/edit.php");
     }
 
-    public void selectContact() {
-        click(By.name("selected[]"));
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void deleteSelectedContact() {
@@ -40,8 +44,8 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public void editContact() {
-        click(By.xpath("//img[@alt='Edit']"));
+    public void editContact(int index) {
+        wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
     }
 
     public void updateContact() {
@@ -66,6 +70,19 @@ public class ContactHelper extends HelperBase {
           return false;
         }
 
+    }
+    public int getContactCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.name("selected[]"));
+        for (WebElement element : elements) {
+            String name = element.getText();
+            ContactData contact = new ContactData(name, null, null, null );
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
