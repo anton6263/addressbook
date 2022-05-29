@@ -21,5 +21,11 @@ public class ContactDeletionTests extends TestBase {
         app.getNavigationHelper().goToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() - 1);
+
+        // Старый список (before) содержит на один элемент больше, чем новый (after), соответственно нам нужно удалить элемент старого списка, чтобы их сравнить
+        before.remove(before.size() - 1);
+        // Сравниваем два списка (Среда разработки сама сравнивает без цикла)
+        Assert.assertEquals(before, after);
+
     }
 }
