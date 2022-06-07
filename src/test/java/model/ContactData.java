@@ -1,27 +1,11 @@
 package model;
 
 public class ContactData {
-    private int id;
-    private final String firstname;
-    private final String lastname;
-    private final String email;
-    private final String homepage;
-
-    public ContactData (String firstname, String lastname, String email, String homepage) {
-        this.id = Integer.MAX_VALUE;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.homepage = homepage;
-    }
-
-    public ContactData (int id, String firstname, String lastname, String email, String homepage) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.homepage = homepage;
-    }
+    private int id = Integer.MAX_VALUE;
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String homepage;
 
     public int getId() {
         return id;
@@ -70,7 +54,28 @@ public class ContactData {
                 '}';
     }
 
-    public void setId(int id) {
+    public ContactData withId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public ContactData withFirstname(String firstname) {
+        this.firstname = firstname;
+        return this;
+    }
+
+    public ContactData withLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withHomepage(String homepage) {
+        this.homepage = homepage;
+        return this;
     }
 }

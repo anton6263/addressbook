@@ -9,12 +9,12 @@ public class NavigationHelper extends HelperBase{
         super(wd);
     }
 
-    public void goToGroupPage() {
+    public void groupPage() {
       click(By.linkText("groups"));
       wd.get("http://localhost/addressbook/group.php");
     }
 
-    public void goToHomePage() {
+    public void homePage() {
       click(By.linkText("home"));
       wd.get("http://localhost/addressbook/");
     }
