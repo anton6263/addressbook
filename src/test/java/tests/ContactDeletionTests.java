@@ -1,11 +1,13 @@
 package tests;
 
 import model.ContactData;
+import model.Contacts;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactDeletionTests extends TestBase {
 
@@ -21,17 +23,19 @@ public class ContactDeletionTests extends TestBase {
 
     @Test
     public void testContactDeletion() {
-        List<ContactData> before = app.contact().list();
-        int index =  before.size() -1;
-        app.contact().delete(index);
-        List<ContactData> after = app.contact().list();
-        Assert.assertEquals(after.size(), index);
+        Contacts before = app.contact().all();
+        ContactData deletedContact = before.iterator().next();
+        app.contact().delete(deletedContact);
+        Contacts after = app.contact().all();
+        Assert.assertEquals(after.size(), before.size() -1);
 
-        // Старый список (before) содержит на один элемент больше, чем новый (after), соответственно нам нужно удалить элемент старого списка, чтобы их сравнить
-        before.remove(index);
-        // Сравниваем два списка (Среда разработки сама сравнивает без цикла)
+        assertThat(after, equalTo(before.without(deletedContact)));
+        /*
+        Старый список (before) содержит на один элемент больше, чем новый (after), соответственно нам нужно удалить элемент старого списка, чтобы их сравнить
+        before.remove(contact);
+        Сравниваем два списка (Среда разработки сама сравнивает без цикла)
         Assert.assertEquals(before, after);
-
+        */
     }
 
 }
