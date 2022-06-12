@@ -1,19 +1,33 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
+import java.io.File;
+
 public class ContactData {
     private int id = Integer.MAX_VALUE;
+    @Expose
     private String firstname;
+    @Expose
     private String lastname;
+    @Expose
     private String email;
     private String email2;
     private String email3;
     private String homepage;
+    @Expose
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
     private String allPhones;
     private String allEmail;
+    @Expose
     private String address;
+    private File Photo;
+
+    public File getPhoto() {
+        return Photo;
+    }
 
     public String getAddress() {
         return address;
@@ -158,6 +172,11 @@ public class ContactData {
 
     public ContactData withAddress(String address) {
         this.address = address;
+        return this;
+    }
+
+    public ContactData withPhoto(File photo) {
+        Photo = photo;
         return this;
     }
 }
