@@ -13,6 +13,11 @@ public class ContactData {
     private String workPhone;
     private String allPhones;
     private String allEmail;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
 
     public String getAllEmail() {
         return allEmail;
@@ -148,6 +153,11 @@ public class ContactData {
 
     public ContactData withEmail3(String email3) {
         this.email3 = email3;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
         return this;
     }
 }

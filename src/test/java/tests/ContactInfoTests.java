@@ -19,6 +19,7 @@ public class ContactInfoTests extends TestBase {
 
         assertThat(contact.getAllPhones(), equalTo(gluePhones(contactInfoFromEditForm)));
         assertThat(contact.getAllEmail(), equalTo(glueEmail(contactInfoFromEditForm)));
+        assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
     }
 
     public static String cleaned(String phone) {
