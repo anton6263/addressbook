@@ -12,26 +12,5 @@
     "email": "test1@test.com",
     "homePhone": "+7942321",
     "address": "test 1"
-  },
-  {
-    "firstname": "test 2",
-    "lastname": "test 2",
-    "email": "test2@test.com",
-    "homePhone": "+7942322",
-    "address": "test 2"
-  },
-  {
-    "firstname": "test 3",
-    "lastname": "test 3",
-    "email": "test3@test.com",
-    "homePhone": "+7942323",
-    "address": "test 3"
-  },
-  {
-    "firstname": "test 4",
-    "lastname": "test 4",
-    "email": "test4@test.com",
-    "homePhone": "+7942324",
-    "address": "test 4"
   }
 ]
