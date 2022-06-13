@@ -28,7 +28,8 @@ public class ContactHelper extends HelperBase {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
         type(By.name("email"), contactData.getEmail());
-        type(By.name("homepage"), contactData.getHomepage());
+        type(By.name("home"), contactData.getHomePhone());
+        type(By.name("address"), contactData.getAddress());
     }
 
     public void goToCreateContactPage() {

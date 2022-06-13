@@ -2,8 +2,6 @@ package model;
 
 import com.google.gson.annotations.Expose;
 
-import java.io.File;
-
 public class ContactData {
     private int id = Integer.MAX_VALUE;
     @Expose
@@ -23,11 +21,6 @@ public class ContactData {
     private String allEmail;
     @Expose
     private String address;
-    private File Photo;
-
-    public File getPhoto() {
-        return Photo;
-    }
 
     public String getAddress() {
         return address;
@@ -172,11 +165,6 @@ public class ContactData {
 
     public ContactData withAddress(String address) {
         this.address = address;
-        return this;
-    }
-
-    public ContactData withPhoto(File photo) {
-        Photo = photo;
         return this;
     }
 }
