@@ -34,7 +34,6 @@ public class ContactHelper extends HelperBase {
 
     public void goToCreateContactPage() {
         click(By.linkText("add new"));
-        wd.get("http://localhost/addressbook/edit.php");
     }
 
     public void selectContact(int index) {
