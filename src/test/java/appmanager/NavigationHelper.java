@@ -11,11 +11,9 @@ public class NavigationHelper extends HelperBase{
 
     public void groupPage() {
       click(By.linkText("groups"));
-      wd.get("http://localhost/addressbook/group.php");
     }
 
     public void homePage() {
       click(By.linkText("home"));
-      wd.get("http://localhost/addressbook/");
     }
 }
