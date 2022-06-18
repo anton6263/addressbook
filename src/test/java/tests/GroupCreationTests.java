@@ -20,6 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase {
 
+
   @DataProvider
   public Iterator<Object[]> validGroupsFromJSON() throws IOException {
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")))) {
@@ -39,14 +40,15 @@ public class GroupCreationTests extends TestBase {
   @Test(dataProvider = "validGroupsFromJSON")
   public void testGroupCreation(GroupData group) {
     app.goTo().groupPage();
-    Groups before = app.group().all();
+    Groups before = app.db().groups();
     // GroupData group = new GroupData().withName("test4").withHeader("test43").withFooter("test1");
     app.group().create(group);
     assertThat(app.group().count(), equalTo(before.size() + 1));
-    Groups after = app.group().all();
+    Groups after = app.db().groups();
 
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+
 
     /*
     Список превращаем в поток -> пробегает функция сравниватель и находит максимальный индентификатор GroupData -> получаем группу с максимальным индентификатором -> получаем этот индентификатор

@@ -32,7 +32,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("address"), contactData.getAddress());
     }
 
-    public void goToCreateContactPage() {
+    public void goToCreateContactPage(){
         click(By.linkText("add new"));
     }
 

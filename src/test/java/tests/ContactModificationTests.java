@@ -13,20 +13,26 @@ public class ContactModificationTests extends TestBase {
     @BeforeMethod
     // Цикл на создание контакта если нет ни одного
     public void ensurePreconditions() {
-        if (app.contact().list().size() == 0) /* Если список контактов ДО пустой */ {
+        if (app.db().contacts().size() == 0) {
             app.contact().create(new ContactData()
                     .withFirstname("Anton").withLastname("Arteev").withEmail("test@test.com").withHomepage("https://github.com/anton6263"));
         }
+        /* Получение списков из пользовательского интерфейса
+        if (app.contact().list().size() == 0) {
+            app.contact().create(new ContactData()
+                    .withFirstname("Anton").withLastname("Arteev").withEmail("test@test.com").withHomepage("https://github.com/anton6263"));
+        }
+        */
     }
 
     @Test
     public void testContactModification(){
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         ContactData modifiedContact = before.iterator().next();
         ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Anton").withLastname("Arteev").withEmail("test@test.com").withHomePhone("+7434555").withAddress("ул. Пушкина");
         app.contact().modify(contact);
         assertThat(app.contact().count(), equalTo(before.size()));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
 
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
         /*
