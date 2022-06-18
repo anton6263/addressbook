@@ -35,6 +35,9 @@ public class ContactModificationTests extends TestBase {
         Contacts after = app.db().contacts();
 
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+        verifyContactListInUi();
+    }
+}
         /*
         Удаляем последний элемент
         before.remove(modifiedContact);
@@ -51,5 +54,3 @@ public class ContactModificationTests extends TestBase {
         Делаем множественные списки и сравниваем
         Assert.assertEquals(before, after);
         */
-    }
-}

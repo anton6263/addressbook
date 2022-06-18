@@ -35,12 +35,13 @@ public class ContactDeletionTests extends TestBase {
         Contacts after = app.db().contacts();
 
         assertThat(after, equalTo(before.without(deletedContact)));
+        verifyContactListInUi();
+    }
+}
+
         /*
         Старый список (before) содержит на один элемент больше, чем новый (after), соответственно нам нужно удалить элемент старого списка, чтобы их сравнить
         before.remove(contact);
         Сравниваем два списка (Среда разработки сама сравнивает без цикла)
         Assert.assertEquals(before, after);
         */
-    }
-
-}

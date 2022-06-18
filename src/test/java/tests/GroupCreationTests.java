@@ -41,14 +41,15 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreation(GroupData group) {
     app.goTo().groupPage();
     Groups before = app.db().groups();
-    // GroupData group = new GroupData().withName("test4").withHeader("test43").withFooter("test1");
     app.group().create(group);
     assertThat(app.group().count(), equalTo(before.size() + 1));
     Groups after = app.db().groups();
 
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-
+    verifyGroupListInUI();
+  }
+}
 
     /*
     Список превращаем в поток -> пробегает функция сравниватель и находит максимальный индентификатор GroupData -> получаем группу с максимальным индентификатором -> получаем этот индентификатор
@@ -62,7 +63,3 @@ public class GroupCreationTests extends TestBase {
     before.sort(byId);
     after.sort(byId);
     */
-
-  }
-
-}
