@@ -2,10 +2,13 @@ package appmanager;
 
 import model.ContactData;
 import model.Contacts;
+import model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +48,6 @@ public class ContactHelper extends HelperBase {
     }
 
     public void deleteSelectedContact() {
-
         click(By.xpath("//input[@value='Delete']"));
     }
 
@@ -74,13 +76,6 @@ public class ContactHelper extends HelperBase {
         fillContactForm(contact);
         updateContact();
         contactsCash = null;
-        goToHomePage();
-    }
-
-    public void delete(int index) {
-        selectContact(index);
-        deleteSelectedContact();
-        acceptAlert();
         goToHomePage();
     }
 
@@ -122,6 +117,12 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
+    public void selectGroupForContact(ContactData contact, GroupData group) {
+        if (contact.getGroups().size() > 0)
+            Assert.assertEquals(contact.getGroups().size(), 1);
+        new Select(wd.findElement(By.name("to_group")))
+                .selectByVisibleText(group.getName());
+    }
 
 
     private Contacts contactsCash = null;
@@ -161,5 +162,22 @@ public class ContactHelper extends HelperBase {
         return new ContactData().withId(contact.getId()).withFirstname(name).withLastname(lastname)
                 .withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone).withEmail(email)
                 .withEmail2(email2).withEmail3(email3).withAddress(address);
+    }
+
+    public void addToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        selectGroupForContact(contact, group);
+        click(By.name("add"));
+        goToHomePage();
+    }
+
+    public void removeContact(ContactData contact) {
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(contact.getGroups().iterator().next().getName());
+        selectContactById(contact.getId());
+        removeFromGroup();
+    }
+
+    private void removeFromGroup() {
+        wd.findElement(By.name("remove")).click();
     }
 }

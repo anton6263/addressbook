@@ -4,6 +4,8 @@ import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -44,6 +46,12 @@ public class ContactData {
     @Type(type = "text")
     private String address;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private final Set<GroupData> groups = new HashSet<>();
+
     public String getAddress() {
         return address;
     }
@@ -59,6 +67,7 @@ public class ContactData {
     public int getId() {
         return id;
     }
+
 
     public String getFirstname() {
         return firstname;
@@ -194,5 +203,9 @@ public class ContactData {
     public ContactData withAddress(String address) {
         this.address = address;
         return this;
+    }
+
+    public Groups getGroups() {
+        return new Groups(groups);
     }
 }

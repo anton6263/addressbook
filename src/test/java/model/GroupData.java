@@ -3,10 +3,9 @@ package model;
 import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "group_list")
@@ -25,6 +24,9 @@ public class GroupData {
     @Column(name = "group_footer")
     @Type(type = "text")
     private String footer;
+
+    @ManyToMany(mappedBy = "groups")
+    private Set<ContactData> contacts = new HashSet<>();
 
     public GroupData withId(int id) {
         this.id = id;
@@ -60,6 +62,10 @@ public class GroupData {
 
     public String getFooter() {
         return footer;
+    }
+
+    public Set<ContactData> getContacts() {
+        return contacts;
     }
 
     @Override
