@@ -28,11 +28,11 @@ public class AddContactInGroupTests extends TestBase {
     public void testAddContactInGroup() {
         Set<ContactData> contactsWithoutGroup = app.contact().all();
         ContactData contactNoneGroup = contactsWithoutGroup.iterator().next();
-        int id = contactNoneGroup.getId();
-        ContactData contact = app.db().contactsInGroup(id);
+        int contactId = contactNoneGroup.getId();
+        ContactData contact = app.db().contactsInGroup(contactId);
         GroupData group = app.db().groups().iterator().next();
         app.contact().addToGroup(contact, group);
-        assertThat(app.db().contactsInGroup(contact.getId()).getGroups().contains(group), equalTo(false));
+        assertThat(app.db().contactsInGroup(contact.getId()).getGroups().contains(group), equalTo(true));
         verifyContactListInUi();
     }
 }
